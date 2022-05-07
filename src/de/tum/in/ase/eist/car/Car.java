@@ -13,12 +13,14 @@ public abstract class Car {
 	protected static final int MAX_ANGLE = 360;
 	protected static final int HALF_ANGLE = MAX_ANGLE / 2;
 
-	protected static final int DEFAULT_CAR_WIDTH = 50;
-	protected static final int DEFAULT_CAR_HEIGHT = 25;
+	protected static final int DEFAULT_CAR_WIDTH = 32;
+	protected static final int DEFAULT_CAR_HEIGHT = 32;
 
-	private int minSpeed;
-	private int maxSpeed;
-	private int speed;
+	private int maxHp;
+	private int hp;
+	private double minSpeed;
+	private double maxSpeed;
+	private double speed;
 	private boolean crunched;
 
 	private Point2D position;
@@ -41,8 +43,26 @@ public abstract class Car {
 	 * @param gameBoardSize dimensions of the game board
 	 */
 	protected Car(Dimension2D gameBoardSize) {
+		this(gameBoardSize, 3);
+	}
+
+	protected Car(Dimension2D gameBoardSize, int hp) {
 		setRandomPosition(gameBoardSize);
 		setRandomDirection();
+		this.maxHp = hp;
+		this.hp = hp;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void decreaseHp() {
+		this.hp--;
+	}
+
+	public boolean isDead() {
+		return hp <= 0;
 	}
 
 	/**
@@ -67,7 +87,7 @@ public abstract class Car {
 	 */
 	protected void setRandomSpeed() {
 		// We pass this.maxSpeed + 1 to include the value of maxSpeed
-		this.speed = calculateRandomInt(this.minSpeed, this.maxSpeed + 1);
+		this.speed = calculateRandomDouble(this.minSpeed, this.maxSpeed + 1);
 	}
 
 	/**
@@ -136,7 +156,7 @@ public abstract class Car {
 		return this.direction;
 	}
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return this.speed;
 	}
 
@@ -192,19 +212,22 @@ public abstract class Car {
 	}
 
 	public void crunch() {
-		this.crunched = true;
-		this.speed = 0;
+		decreaseHp();
+		if(isDead()) {
+			this.crunched = true;
+			this.speed = 0;
+		}
 	}
 
 	public boolean isCrunched() {
 		return this.crunched;
 	}
 
-	public int getMaxSpeed() {
+	public double getMaxSpeed() {
 		return this.maxSpeed;
 	}
 
-	public int getMinSpeed() {
+	public double getMinSpeed() {
 		return this.minSpeed;
 	}
 

@@ -34,6 +34,7 @@ public class GameBoardUI extends Canvas {
 	private static final int DEFAULT_WIDTH = 500;
 	private static final int DEFAULT_HEIGHT = 300;
 	private static final Dimension2D DEFAULT_SIZE = new Dimension2D(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	private static final String BG_IMAGE_LOC = "background.jpg";
 
 	public static Dimension2D getPreferredSize() {
 		return DEFAULT_SIZE;
@@ -187,14 +188,19 @@ public class GameBoardUI extends Canvas {
 	 * game board at render each of them individually.
 	 */
 	private void paint() {
-		getGraphicsContext2D().setFill(BACKGROUND_COLOR);
-		getGraphicsContext2D().fillRect(0, 0, getWidth(), getHeight());
+		// getGraphicsContext2D().setFill(BACKGROUND_COLOR);
+		// getGraphicsContext2D().fillRect(0, 0, getWidth(), getHeight());
+		paintBackground();
 
 		for (Car car : this.gameBoard.getCars()) {
 			paintCar(car);
 		}
 		// render player car
 		paintCar(this.gameBoard.getPlayerCar());
+	}
+
+	private void paintBackground() {
+		getGraphicsContext2D().drawImage(getImage(BG_IMAGE_LOC), 0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
 	/**
