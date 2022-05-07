@@ -25,19 +25,32 @@ public class CombatCollision extends Collision {
     }
 
     public Car evaluate() {
+        int c1Attack = getCar1().getAttack();
+        int c2Attack = getCar2().getAttack();
 
-        // TODO Backlog Item 11: Collisions follow the "right before left" rule, and thus right-most
-        // cars on the screen win the collisions
+        int c1Defense = getCar1().getDefense();
+        int c2Defense = getCar2().getDefense();
 
-        Point2D p1 = getCar1().getPosition();
-        Point2D p2 = getCar2().getPosition();
+        int c1Toc2Dmg = Math.max(0, c1Attack - c2Defense);
+        int c2Toc1Dmg = Math.max(0, c2Attack - c1Defense);
 
-        Car winnerCar;
-        if (p1.getX() > p2.getX()) {
-            winnerCar = this.getCar1();
-        } else {
-            winnerCar = this.getCar2();
+        Car winner = null;
+
+        getCar2().damage(c1Toc2Dmg);
+
+        if(getCar2().isDead()) {
+            winner = getCar1();
         }
-        return winnerCar;
+
+        getCar1().damage(c2Toc1Dmg);
+
+        if(getCar1().isDead()) {
+            winner = getCar2();
+        }
+
+        getCar1().knockBack();
+        getCar2().knockBack();
+
+        return winner;
     }
 }

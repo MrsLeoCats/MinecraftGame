@@ -2,6 +2,7 @@ package de.tum.in.ase.eist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import de.tum.in.ase.eist.audio.AudioPlayerInterface;
 import de.tum.in.ase.eist.car.*;
@@ -18,10 +19,16 @@ public class GameBoard {
     private static final int NUMBER_OF_SKELETON_CARS = 3;
     private static final int NUMBER_OF_ENDERMAN_CARS = 1;
 
+    private static GameBoard instance;
+
+    public static GameBoard getInstance() {
+        return instance;
+    }
+
     /**
      * List of all active cars, does not contain player car.
      */
-    private final List<Car> cars = new ArrayList<>();
+    private final List<Car> cars = new CopyOnWriteArrayList<>();
 
     /**
      * The player object with player's car.
@@ -59,11 +66,16 @@ public class GameBoard {
      * @param size of the game board
      */
     public GameBoard(Dimension2D size) {
+        instance = this;
         this.size = size;
         PlayerCar playerCar = new PlayerCar(size);
         this.player = new Player(playerCar);
         this.player.setup();
         createCars();
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     /**
@@ -204,6 +216,9 @@ public class GameBoard {
 
             if (collision.isCrash()) {
                 Car winner = collision.evaluate();
+                if (winner == null) {
+                    continue;
+                }
                 Car loser = collision.evaluateLoser();
                 printWinner(winner);
                 loserCars.add(loser);
