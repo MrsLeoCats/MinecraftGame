@@ -73,10 +73,10 @@ public class GameBoard {
     private void createCars() {
         // TODO Backlog Item 6: Add a new car type
         for (int i = 0; i < NUMBER_OF_SKELETON_CARS; i++) {
-            this.cars.add(new SkeletonCar(this.size));
+            this.cars.add(new SlowCar(this.size));
         }
         for (int i = 0; i < NUMBER_OF_ZOMBIE_CARS; i++) {
-            this.cars.add(new ZombieCar(this.size));
+            this.cars.add(new FastCar(this.size));
         }
         for (int i = 0; i < NUMBER_OF_ENDERMAN_CARS; i++) {
             this.cars.add(new EndermanCar(this.size));
