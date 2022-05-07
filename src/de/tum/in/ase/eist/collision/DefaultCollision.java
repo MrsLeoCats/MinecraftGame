@@ -34,9 +34,9 @@ public class DefaultCollision extends Collision {
 
 		Car winnerCar;
 		if (p1.getX() > p2.getX()) {
-			winnerCar = this.getCar2();
-		} else {
 			winnerCar = this.getCar1();
+		} else {
+			winnerCar = this.getCar2();
 		}
 		return winnerCar;
 	}

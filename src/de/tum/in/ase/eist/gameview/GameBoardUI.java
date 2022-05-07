@@ -193,6 +193,9 @@ public class GameBoardUI extends Canvas {
 		paintBackground();
 
 		for (Car car : this.gameBoard.getCars()) {
+			if(car.isCrunched()) {
+				continue;
+			}
 			paintCar(car);
 		}
 		// render player car

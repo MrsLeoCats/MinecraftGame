@@ -6,7 +6,7 @@ import java.util.List;
 import de.tum.in.ase.eist.audio.AudioPlayerInterface;
 import de.tum.in.ase.eist.car.*;
 import de.tum.in.ase.eist.collision.Collision;
-import de.tum.in.ase.eist.collision.DefaultCollision;
+import de.tum.in.ase.eist.collision.CombatCollision;
 
 /**
  * Creates all car objects, detects collisions, updates car positions, notifies
@@ -200,7 +200,7 @@ public class GameBoard {
              * collision between player car and autonomous car evaluates as expected
              */
 
-            Collision collision = new DefaultCollision(player.getCar(), car);
+            Collision collision = new CombatCollision(player.getCar(), car);
 
             if (collision.isCrash()) {
                 Car winner = collision.evaluate();

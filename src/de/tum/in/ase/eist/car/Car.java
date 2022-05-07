@@ -16,8 +16,6 @@ public abstract class Car {
 	protected static final int DEFAULT_CAR_WIDTH = 32;
 	protected static final int DEFAULT_CAR_HEIGHT = 32;
 
-	private int maxHp;
-	private int hp;
 	private double minSpeed;
 	private double maxSpeed;
 	private double speed;
@@ -49,20 +47,6 @@ public abstract class Car {
 	protected Car(Dimension2D gameBoardSize, int hp) {
 		setRandomPosition(gameBoardSize);
 		setRandomDirection();
-		this.maxHp = hp;
-		this.hp = hp;
-	}
-
-	public int getHp() {
-		return hp;
-	}
-
-	public void decreaseHp() {
-		this.hp--;
-	}
-
-	public boolean isDead() {
-		return hp <= 0;
 	}
 
 	/**
@@ -212,11 +196,8 @@ public abstract class Car {
 	}
 
 	public void crunch() {
-		decreaseHp();
-		if(isDead()) {
-			this.crunched = true;
-			this.speed = 0;
-		}
+		this.crunched = true;
+		this.speed = 0;
 	}
 
 	public boolean isCrunched() {
