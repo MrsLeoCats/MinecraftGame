@@ -53,6 +53,8 @@ public class GameBoardUI extends Canvas {
 
 	private HashMap<String, Image> imageCache;
 
+	private final GameTimer gameScoreTimer = new GameTimer();
+
 	public GameBoardUI(GameToolBar gameToolBar) {
 		this.gameToolBar = gameToolBar;
 		setup();
@@ -135,6 +137,7 @@ public class GameBoardUI extends Canvas {
 			this.gameToolBar.updateToolBarStatus(true);
 			startTimer();
 			paint();
+			gameScoreTimer.startTimer();
 		}
 	}
 
@@ -158,10 +161,10 @@ public class GameBoardUI extends Canvas {
 			this.gameBoard.update();
 			// when this.gameBoard.getOutcome() is OPEN, do nothing
 			if (this.gameBoard.getGameOutcome() == GameOutcome.LOST) {
-				showAsyncAlert("Oh.. you lost.");
+				showAsyncAlert("Oh.. you lost. \nTime: " + gameScoreTimer.toReadable());
 				this.stopGame();
 			} else if (this.gameBoard.getGameOutcome() == GameOutcome.WON) {
-				showAsyncAlert("Congratulations! You won!!");
+				showAsyncAlert("Congratulations! You won!! \nTime: " + gameScoreTimer.toReadable());
 				this.stopGame();
 			}
 			paint();

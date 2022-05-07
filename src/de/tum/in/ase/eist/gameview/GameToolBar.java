@@ -12,6 +12,8 @@ public class GameToolBar extends ToolBar {
 	private final Button start;
 	private final Button stop;
 
+	private GameTimer gameTimer;
+
 	public GameToolBar() {
 		this.start = new Button("Start");
 		this.stop = new Button("Stop");
