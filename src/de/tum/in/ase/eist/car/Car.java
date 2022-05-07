@@ -212,15 +212,15 @@ public abstract class Car {
 		return this.minSpeed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
-	public void setMaxSpeed(int maxSpeed) {
+	public void setMaxSpeed(double maxSpeed) {
 		this.maxSpeed = maxSpeed;
 	}
 
-	public void setMinSpeed(int minSpeed) {
+	public void setMinSpeed(double minSpeed) {
 		this.minSpeed = minSpeed;
 	}
 

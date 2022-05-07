@@ -6,8 +6,8 @@ public class PlayerCar extends Car {
 
     private static final String PLAYER_CAR_IMAGE_FILE = "PlayerCarSteve.jpg";
 
-    private static final int MIN_SPEED_PLAYER_CAR = 200;
-    private static final int MAX_SPEED_PLAYER_CAR = 1000;
+    private static final double MIN_SPEED_PLAYER_CAR = 1.0;
+    private static final double MAX_SPEED_PLAYER_CAR = 2.0;
 
     public PlayerCar(Dimension2D gameBoardSize) {
         super(gameBoardSize);
