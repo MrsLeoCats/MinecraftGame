@@ -13,6 +13,20 @@ public class Player {
 
 	private Car car;
 
+	private int score = 0;
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public void increaseScore(int amount) {
+		score += amount;
+	}
+
 	/**
 	 * Constructor that allocates a car to the player.
 	 *
