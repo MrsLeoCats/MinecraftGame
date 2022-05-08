@@ -1,6 +1,7 @@
 package de.tum.in.ase.eist.car;
 
 import de.tum.in.ase.eist.Dimension2D;
+import de.tum.in.ase.eist.GameBoard;
 
 public class PlayerCar extends Car {
 
@@ -8,7 +9,7 @@ public class PlayerCar extends Car {
     private static final int BASE_HP = 25;
 
     private static final double MIN_SPEED_PLAYER_CAR = 0.5;
-    private static final double MAX_SPEED_PLAYER_CAR = 2.0;
+    private static final double MAX_SPEED_PLAYER_CAR = 3.0;
     private static final double PLAYER_ACCELERATION = 0.33;
 
     public PlayerCar(Dimension2D gameBoardSize) {
@@ -19,4 +20,9 @@ public class PlayerCar extends Car {
         setIconLocation(PLAYER_CAR_IMAGE_FILE);
         setAcceleration(PLAYER_ACCELERATION);
     }
+
+    public int getAttack() {
+        return super.getAttack() + GameBoard.getInstance().getPlayer().getItem().damage();
+    }
+
 }

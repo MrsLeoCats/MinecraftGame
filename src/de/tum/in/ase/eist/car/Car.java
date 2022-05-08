@@ -35,6 +35,8 @@ public abstract class Car {
     private double acceleration;
     private int attack;
     private int defense;
+    protected boolean knockBackApplier = true;
+    protected boolean hostile = true;
 
     private Point2D position;
     /**
@@ -68,6 +70,10 @@ public abstract class Car {
         acceleration = DEFAULT_ACCELERATION;
         attack = DEFAULT_ATTACK;
         defense = DEFAULT_DEFENSE;
+    }
+
+    public boolean isKnockBackApplier() {
+        return knockBackApplier;
     }
 
     /**
@@ -125,14 +131,14 @@ public abstract class Car {
 
         // calculate position in case the boarder of the game board has been reached
         if (newX < 0) {
-            if(crunchesOnBorder) {
+            if (crunchesOnBorder) {
                 crunch();
                 return;
             }
             newX = -newX;
             this.direction = MAX_ANGLE - this.direction;
         } else if (newX + this.size.getWidth() > maxX) {
-            if(crunchesOnBorder) {
+            if (crunchesOnBorder) {
                 crunch();
                 return;
             }
@@ -141,7 +147,7 @@ public abstract class Car {
         }
 
         if (newY < 0) {
-            if(crunchesOnBorder) {
+            if (crunchesOnBorder) {
                 crunch();
                 return;
             }
@@ -151,7 +157,7 @@ public abstract class Car {
                 this.direction = MAX_ANGLE + this.direction;
             }
         } else if (newY + this.size.getHeight() > maxY) {
-            if(crunchesOnBorder) {
+            if (crunchesOnBorder) {
                 crunch();
                 return;
             }
@@ -165,11 +171,15 @@ public abstract class Car {
         this.position = new Point2D(newX, newY);
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
     public int getRotationTowards(Point2D position) {
         double dirX = position.getX() - getPosition().getX();
         double dirY = position.getY() - getPosition().getY();
         int dir = (int) Math.toDegrees(Math.atan2(dirX, dirY));
-        if(dir < 0) {
+        if (dir < 0) {
             dir += MAX_ANGLE;
         }
         return dir;
@@ -352,5 +362,9 @@ public abstract class Car {
 
     public void knockBack() {
         setSpeed(-KNOCK_BACK_SPEED);
+    }
+
+    public boolean isHostile() {
+        return hostile;
     }
 }

@@ -38,18 +38,22 @@ public class CombatCollision extends Collision {
 
         getCar2().damage(c1Toc2Dmg);
 
-        if(getCar2().isDead()) {
+        if (getCar2().isDead()) {
             winner = getCar1();
         }
 
         getCar1().damage(c2Toc1Dmg);
 
-        if(getCar1().isDead()) {
+        if (getCar1().isDead()) {
             winner = getCar2();
         }
 
-        getCar1().knockBack();
-        getCar2().knockBack();
+        if (getCar2().isKnockBackApplier()) {
+            getCar1().knockBack();
+        }
+        if (getCar1().isKnockBackApplier()) {
+            getCar2().knockBack();
+        }
 
         return winner;
     }

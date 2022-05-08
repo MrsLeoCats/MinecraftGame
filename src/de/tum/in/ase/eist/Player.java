@@ -13,6 +13,8 @@ public class Player {
 
 	private Car car;
 
+	private Item item = Item.next();
+
 	private int score = 0;
 
 	public int getScore() {
@@ -21,6 +23,15 @@ public class Player {
 
 	public void setScore(int score) {
 		this.score = score;
+		if(score == 5) {
+			item = Item.next();
+		}
+		if(score == 15) {
+			item = Item.next();
+		}
+		if(score == 30) {
+			item = Item.next();
+		}
 	}
 
 	public void increaseScore(int amount) {
@@ -51,5 +62,9 @@ public class Player {
 		// The player always starts in the upper left corner facing to the right
 		car.setPosition(START_X_COORDINATE, START_Y_COORDINATE);
 		car.setDirection(START_DIRECTION);
+	}
+
+	public Item getItem() {
+		return item;
 	}
 }

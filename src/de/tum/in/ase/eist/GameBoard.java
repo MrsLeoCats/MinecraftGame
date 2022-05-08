@@ -3,7 +3,9 @@ package de.tum.in.ase.eist;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
+import com.sun.javafx.animation.TickCalculation;
 import de.tum.in.ase.eist.audio.AudioPlayerInterface;
 import de.tum.in.ase.eist.car.*;
 import de.tum.in.ase.eist.collision.Collision;
@@ -15,11 +17,14 @@ import de.tum.in.ase.eist.collision.CombatCollision;
  */
 public class GameBoard {
 
+    private static int spawn_ticks = 300;
     private static final int NUMBER_OF_ZOMBIE_CARS = 4;
     private static final int NUMBER_OF_SKELETON_CARS = 3;
     private static final int NUMBER_OF_ENDERMAN_CARS = 1;
 
     private static GameBoard instance;
+
+    private int ticksAlive = 0;
 
     public static GameBoard getInstance() {
         return instance;
@@ -148,7 +153,50 @@ public class GameBoard {
      * Updates the position of each car.
      */
     public void update() {
+        ticksAlive++;
         moveCars();
+        checkSpawns();
+    }
+
+    private void checkSpawns() {
+        if (ticksAlive % spawn_ticks == 0) {
+            randomSpawn();
+            if (spawn_ticks > 50) {
+                spawn_ticks -= 3;
+            }
+        }
+        if (ThreadLocalRandom.current().nextDouble() < 0.01) {
+            cars.add(new CollectableHpCar(size));
+        }
+    }
+
+    private void randomSpawn() {
+        boolean spawnBoss = true;
+        int counter = 0;
+        for(Car car : cars) {
+            if(car.isHostile()) {
+                counter++;
+            }
+            if(car instanceof BossCar) {
+                spawnBoss = false;
+                break;
+            }
+        }
+        spawnBoss = spawnBoss && counter < 3;
+        if(spawnBoss) {
+            cars.add(new BossCar(size));
+            return;
+        }
+        double value = ThreadLocalRandom.current().nextDouble();
+        if (value < 0.45) {
+            cars.add(new FastCar(size));
+        } else if (value < 0.80) {
+            cars.add(new SlowCar(size));
+        } else if (value < 0.96) {
+            cars.add(new EndermanCar(size));
+        } else {
+            cars.add(new BossCar(size));
+        }
     }
 
     /**
@@ -157,6 +205,7 @@ public class GameBoard {
     public void startGame() {
         playMusic();
         this.running = true;
+        Item.reset();
     }
 
     /**
@@ -255,7 +304,7 @@ public class GameBoard {
      */
     private boolean isWinner() {
         for (Car car : getCars()) {
-            if (!car.isCrunched()) {
+            if (car.isHostile() && !car.isCrunched()) {
                 return false;
             }
         }
