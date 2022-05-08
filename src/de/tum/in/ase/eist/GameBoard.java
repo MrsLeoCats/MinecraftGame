@@ -224,6 +224,12 @@ public class GameBoard {
                 loserCars.add(loser);
 
                 this.audioPlayer.playCrashSound();
+                if (loser instanceof CollectableCar collectableCar) {
+                    collectableCar.onPickup(player);
+                }
+                if (!(loser instanceof ProjectileCar)) {
+                    incrementScore(winner);
+                }
 
                 // TODO Backlog Item 11: The loser car is crunched and stops driving
                 loser.crunch();
@@ -254,6 +260,12 @@ public class GameBoard {
             }
         }
         return true;
+    }
+
+    private void incrementScore(Car winner) {
+        if (winner == this.player.getCar()) {
+            player.setScore(player.getScore() + 1);
+        }
     }
 
     private void printWinner(Car winner) {

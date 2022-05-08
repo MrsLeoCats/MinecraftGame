@@ -263,6 +263,11 @@ public abstract class Car {
         return 1.0 / maxHp * hp;
     }
 
+    public void heal(int amount) {
+        hp += amount;
+        hp = Math.min(hp, maxHp);
+    }
+
     public void damage(int amount) {
         hp -= amount;
         hp = Math.max(0, hp);

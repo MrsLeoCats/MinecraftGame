@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 /**
  * This class implements the user interface for steering the player car. The
@@ -203,6 +204,17 @@ public class GameBoardUI extends Canvas {
         }
         // render player car
         paintCar(this.gameBoard.getPlayerCar());
+    }
+
+    private void paintTimer() {
+        getGraphicsContext2D().setFill(Color.BLACK);
+        getGraphicsContext2D().setFont(new Font("Arial", 16));
+        getGraphicsContext2D().fillText("Time: " + gameScoreTimer.toReadable(), 44, 390);
+    }
+
+    private void paintInv() {
+        getGraphicsContext2D().drawImage(getImage(INV_SLOT_LOC), 140, 380, 32, 32);
+        getGraphicsContext2D().drawImage(getImage(gameBoard.getPlayer().getItem().image()), 144, 384, 24, 24);
     }
 
     private void paintBackground() {
