@@ -43,7 +43,6 @@ public class AudioPlayer implements AudioPlayerInterface {
     private final AudioClip hitEndermanPlayer;
     private final AudioClip hitSkeletonPlayer;
     private final AudioClip bossSpawnPlayer;
-    private final AudioClip arrowPlayer;
 
     private final AudioClip deathPlayer;
 
@@ -59,7 +58,6 @@ public class AudioPlayer implements AudioPlayerInterface {
         this.hitEndermanPlayer = new AudioClip(convertNameToUrl(HITENDERMAN_SOUND_FILE));
         this.hitSkeletonPlayer = new AudioClip(convertNameToUrl(HITSKELETON_SOUND_FILE));
         this.bossSpawnPlayer = new AudioClip(convertNameToUrl(BOSSSPAWN_SOUND_FILE));
-        this.arrowPlayer = new AudioClip(convertNameToUrl(ARROW_SOUND_FILE));
         this.deathPlayer = new AudioClip(convertNameToUrl(PLAYERDEATH_SOUND_FILE));
     }
 
@@ -107,9 +105,6 @@ public class AudioPlayer implements AudioPlayerInterface {
     }
     public void playBossSpawnSound() {
         bossSpawnPlayer.play(BOSSSPAWN_SOUND_VOLUME);
-    }
-    public void playArrowSound() {
-        arrowPlayer.play(ARROW_SOUND_VOLUME);
     }
     public void playPlayerDeathSound() {
         deathPlayer.play(PLAYERDEATH_SOUND_VOLUME);
