@@ -6,6 +6,8 @@ package de.tum.in.ase.eist.audio;
  */
 public interface AudioPlayerInterface {
 
+	AudioPlayerInterface instanceHackBecauseOfCodeIssues = null;
+
 	/**
 	 * Starts playing the background music if it's not started already.
 	 */

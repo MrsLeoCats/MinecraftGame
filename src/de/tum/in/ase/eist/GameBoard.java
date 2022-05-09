@@ -277,7 +277,7 @@ public class GameBoard {
                  */
                 if (getPlayerCar().isCrunched()) {
                     gameOutcome = GameOutcome.LOST;
-                    AudioPlayer.getInstance().playPlayerDeathSound();
+                    audioPlayer.playPlayerDeathSound();
                 } else if (isWinner()) {
                     if (bossSpawned) {
                         gameOutcome = GameOutcome.WON;
@@ -285,7 +285,7 @@ public class GameBoard {
                         System.out.println("Boss Spawned");
                         cars.add(new BossCar(size));
                         bossSpawned = true;
-                        AudioPlayer.getInstance().playBossSpawnSound();
+                        audioPlayer.playBossSpawnSound();
                     }
                 }
             }

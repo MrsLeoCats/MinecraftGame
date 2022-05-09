@@ -11,8 +11,6 @@ import javafx.scene.media.MediaPlayer;
  */
 public class AudioPlayer implements AudioPlayerInterface {
 
-    private static AudioPlayer instance;
-
     private static final String BACKGROUND_MUSIC_FILE = "backgroundmusic.wav";
     private static final String CRASH_SOUND_FILE = "Crash.wav";
 
@@ -47,16 +45,11 @@ public class AudioPlayer implements AudioPlayerInterface {
 
     private final AudioClip deathPlayer;
 
-    public static AudioPlayer getInstance() {
-        return instance;
-    }
-
     /**
      * Constructs a new AudioPlayer by directly loading the background music and
      * crash sound files into a new MediaPlayer / AudioClip.
      */
     public AudioPlayer() {
-        instance = this;
         this.musicPlayer = new MediaPlayer(loadAudioFile(BACKGROUND_MUSIC_FILE));
         this.crashPlayer = new AudioClip(convertNameToUrl(CRASH_SOUND_FILE));
         this.teleportPlayer = new AudioClip(convertNameToUrl(TELEPORT_SOUND_FILE));

@@ -61,12 +61,12 @@ public class BossCar extends Car {
         tpFromPos = new Point2D(current.getX(), current.getY());
         tpDrawCounter = LINGERING_TP_TIME;
         setPosition(current.getX() + dx, current.getY() + dy);
-        AudioPlayer.getInstance().playTeleportSound();
+        GameBoard.getInstance().getAudioPlayer().playTeleportSound();
     }
 
     @Override
     public void onCollision() {
-        AudioPlayer.getInstance().playHitEndermanSound();
+        GameBoard.getInstance().getAudioPlayer().playHitEndermanSound();
     }
 
     @Override

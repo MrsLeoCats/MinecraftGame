@@ -44,7 +44,7 @@ public class SlowCar extends Car {
 
     @Override
     public void onCollision() {
-        AudioPlayer.getInstance().playHitSkeletonSound();
+        GameBoard.getInstance().getAudioPlayer().playHitSkeletonSound();
     }
 
 }
