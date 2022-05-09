@@ -3,10 +3,10 @@ package de.tum.in.ase.eist;
 public class Item {
 
     private static final Item[] ITEMS = new Item[]{
-            new Item("wooden_sword.png", 2),
+            new Item("wooden_sword.png", 1),
             new Item("stone_sword.png", 3),
-            new Item("iron_sword.png", 4),
-            new Item("diamond_sword.png", 5)
+            new Item("iron_sword.png", 5),
+            new Item("diamond_sword.png", 7)
     };
 
     private static int counter = 0;

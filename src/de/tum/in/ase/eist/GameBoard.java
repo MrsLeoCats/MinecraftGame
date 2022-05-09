@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.sun.javafx.animation.TickCalculation;
+import de.tum.in.ase.eist.audio.AudioPlayer;
 import de.tum.in.ase.eist.audio.AudioPlayerInterface;
 import de.tum.in.ase.eist.car.*;
 import de.tum.in.ase.eist.collision.Collision;
@@ -24,11 +25,12 @@ public class GameBoard {
 
     private static GameBoard instance;
 
-    private int ticksAlive = 0;
-
     public static GameBoard getInstance() {
         return instance;
     }
+
+    private int ticksAlive = 0;
+    private boolean bossSpawned = false;
 
     /**
      * List of all active cars, does not contain player car.
@@ -159,7 +161,7 @@ public class GameBoard {
     }
 
     private void checkSpawns() {
-        if (ticksAlive % spawn_ticks == 0) {
+        if (ticksAlive % spawn_ticks == 0 && !bossSpawned) {
             randomSpawn();
             if (spawn_ticks > 50) {
                 spawn_ticks -= 3;
@@ -171,31 +173,13 @@ public class GameBoard {
     }
 
     private void randomSpawn() {
-        boolean spawnBoss = true;
-        int counter = 0;
-        for(Car car : cars) {
-            if(car.isHostile()) {
-                counter++;
-            }
-            if(car instanceof BossCar) {
-                spawnBoss = false;
-                break;
-            }
-        }
-        spawnBoss = spawnBoss && counter < 3;
-        if(spawnBoss) {
-            cars.add(new BossCar(size));
-            return;
-        }
         double value = ThreadLocalRandom.current().nextDouble();
         if (value < 0.45) {
             cars.add(new FastCar(size));
         } else if (value < 0.80) {
             cars.add(new SlowCar(size));
-        } else if (value < 0.96) {
-            cars.add(new EndermanCar(size));
         } else {
-            cars.add(new BossCar(size));
+            cars.add(new EndermanCar(size));
         }
     }
 
@@ -264,6 +248,10 @@ public class GameBoard {
             Collision collision = new CombatCollision(player.getCar(), car);
 
             if (collision.isCrash()) {
+
+                car.onCollision();
+                player.getCar().onCollision();
+
                 Car winner = collision.evaluate();
                 if (winner == null) {
                     continue;
@@ -271,8 +259,8 @@ public class GameBoard {
                 Car loser = collision.evaluateLoser();
                 printWinner(winner);
                 loserCars.add(loser);
+                cars.remove(loser);
 
-                this.audioPlayer.playCrashSound();
                 if (loser instanceof CollectableCar collectableCar) {
                     collectableCar.onPickup(player);
                 }
@@ -282,7 +270,6 @@ public class GameBoard {
 
                 // TODO Backlog Item 11: The loser car is crunched and stops driving
                 loser.crunch();
-
                 // TODO Backlog Item 11: The player gets notified when he looses or wins the game
                 /*
                  * Hint: you should set the attribute gameOutcome accordingly. Use 'isWinner()'
@@ -290,8 +277,16 @@ public class GameBoard {
                  */
                 if (getPlayerCar().isCrunched()) {
                     gameOutcome = GameOutcome.LOST;
+                    AudioPlayer.getInstance().playPlayerDeathSound();
                 } else if (isWinner()) {
-                    gameOutcome = GameOutcome.WON;
+                    if (bossSpawned) {
+                        gameOutcome = GameOutcome.WON;
+                    } else {
+                        System.out.println("Boss Spawned");
+                        cars.add(new BossCar(size));
+                        bossSpawned = true;
+                        AudioPlayer.getInstance().playBossSpawnSound();
+                    }
                 }
             }
         }

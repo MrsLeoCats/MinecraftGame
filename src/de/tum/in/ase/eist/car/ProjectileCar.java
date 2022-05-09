@@ -14,7 +14,7 @@ public class ProjectileCar extends Car {
     private static final String PROJECTILE_CAR_IMAGE_FILE = "ProjectileCar.png";
     private static final double PROJECTILE_SPEED = 4.0;
     private static final double ACCELERATION = 1.0;
-    private final ArrayDeque<Point2D> path = new ArrayDeque<>();
+    protected final ArrayDeque<Point2D> path = new ArrayDeque<>();
 
     public ProjectileCar(Dimension2D gameBoardSize, Point2D position, int attack, int direction) {
         super(gameBoardSize, HP);
@@ -28,10 +28,12 @@ public class ProjectileCar extends Car {
         this.size = new Dimension2D(SIZE, SIZE);
         this.crunchesOnBorder = true;
         this.knockBackApplier = false;
+        this.hostile = false;
     }
 
     @Override
     public void onDraw(GraphicsContext context) {
+        super.onDraw(context);
         path.add(new Point2D(getPosition().getX(), getPosition().getY()));
         if(path.size() >= 6) {
             path.poll();

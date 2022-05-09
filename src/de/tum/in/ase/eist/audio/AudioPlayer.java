@@ -11,20 +11,21 @@ import javafx.scene.media.MediaPlayer;
  */
 public class AudioPlayer implements AudioPlayerInterface {
 
+    private static AudioPlayer instance;
+
     private static final String BACKGROUND_MUSIC_FILE = "backgroundmusic.wav";
-    private static final String CRASH_SOUND_FILE = "collisionsound.mp3";
+    private static final String CRASH_SOUND_FILE = "Crash.wav";
 
     /**
      * New Sounds I've implemented
      */
-    private static final String TELEPORT_SOUND_FILE = "teleportsound.mp3";
-    private static final String HITZOMBIE_SOUND_FILE = "hitzombie.mp3";
-    private static final String HITENDERMAN_SOUND_FILE = "hitenderman.mp3";
-    private static final String HITSKELETON_SOUND_FILE = "hitskeleton.mp3";
-    private static final String BOSSSPAWN_SOUND_FILE = "bossspawn.mp3";
-    private static final String ARROW_SOUND_FILE = "arrowhit.mp3";
+    private static final String TELEPORT_SOUND_FILE = "teleportsound.wav";
+    private static final String HITZOMBIE_SOUND_FILE = "hitzombie.wav";
+    private static final String HITENDERMAN_SOUND_FILE = "hitenderman.wav";
+    private static final String HITSKELETON_SOUND_FILE = "hitskeleton.wav";
+    private static final String BOSSSPAWN_SOUND_FILE = "bossspawn.wav";
 
-    private static final String PLAYERDEATH_SOUND_FILE = "playerDeath.mp3";
+    private static final String PLAYERDEATH_SOUND_FILE = "playerDeath.wav";
 
     private static final double TELEPORT_SOUND_VOLUME = 0.5;
     private static final double HITZOMBIE_SOUND_VOLUME = 0.5;
@@ -46,11 +47,16 @@ public class AudioPlayer implements AudioPlayerInterface {
 
     private final AudioClip deathPlayer;
 
+    public static AudioPlayer getInstance() {
+        return instance;
+    }
+
     /**
      * Constructs a new AudioPlayer by directly loading the background music and
      * crash sound files into a new MediaPlayer / AudioClip.
      */
     public AudioPlayer() {
+        instance = this;
         this.musicPlayer = new MediaPlayer(loadAudioFile(BACKGROUND_MUSIC_FILE));
         this.crashPlayer = new AudioClip(convertNameToUrl(CRASH_SOUND_FILE));
         this.teleportPlayer = new AudioClip(convertNameToUrl(TELEPORT_SOUND_FILE));

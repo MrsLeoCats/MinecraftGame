@@ -6,6 +6,7 @@ import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.GameBoard;
 import de.tum.in.ase.eist.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  * Abstract class for cars. Objects for this class cannot be instantiated.
@@ -37,6 +38,7 @@ public abstract class Car {
     private int defense;
     protected boolean knockBackApplier = true;
     protected boolean hostile = true;
+    protected int dmgCounter = 0;
 
     private Point2D position;
     /**
@@ -105,6 +107,10 @@ public abstract class Car {
         this.acceleration = value;
     }
 
+    public void onCollision() {
+
+    }
+
     /**
      * Drives the car and updates its position and possibly its direction.
      * <p>
@@ -131,6 +137,7 @@ public abstract class Car {
 
         // calculate position in case the boarder of the game board has been reached
         if (newX < 0) {
+            onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
                 return;
@@ -138,6 +145,7 @@ public abstract class Car {
             newX = -newX;
             this.direction = MAX_ANGLE - this.direction;
         } else if (newX + this.size.getWidth() > maxX) {
+            onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
                 return;
@@ -147,6 +155,7 @@ public abstract class Car {
         }
 
         if (newY < 0) {
+            onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
                 return;
@@ -157,6 +166,7 @@ public abstract class Car {
                 this.direction = MAX_ANGLE + this.direction;
             }
         } else if (newY + this.size.getHeight() > maxY) {
+            onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
                 return;
@@ -169,6 +179,10 @@ public abstract class Car {
         }
         // set coordinates
         this.position = new Point2D(newX, newY);
+    }
+
+    public void onWallCollide() {
+
     }
 
     public int getMaxHp() {
@@ -190,7 +204,13 @@ public abstract class Car {
     }
 
     public void onDraw(GraphicsContext context) {
-
+        this.dmgCounter--;
+        if(dmgCounter > 0) {
+            context.setGlobalAlpha(0.4);
+            context.setFill(Color.RED);
+            context.fillRect(position.getX(), position.getY(), size.getWidth(), size.getHeight());
+            context.setGlobalAlpha(1.0);
+        }
     }
 
     /**
@@ -279,6 +299,9 @@ public abstract class Car {
     }
 
     public void damage(int amount) {
+        if(amount > 0) {
+            dmgCounter = 10;
+        }
         hp -= amount;
         hp = Math.max(0, hp);
     }
@@ -360,7 +383,8 @@ public abstract class Car {
         return ThreadLocalRandom.current().nextDouble(minValue, maxValue);
     }
 
-    public void knockBack() {
+    public void knockBack(Point2D from) {
+        setDirection(getRotationTowards(from));
         setSpeed(-KNOCK_BACK_SPEED);
     }
 

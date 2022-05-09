@@ -13,6 +13,7 @@ public abstract class CollectableCar extends Car {
         this.crunchesOnBorder = true;
         this.knockBackApplier = false;
         this.hostile = false;
+        this.setAttack(0);
     }
 
     public abstract void onPickup(Player player);

@@ -49,10 +49,10 @@ public class CombatCollision extends Collision {
         }
 
         if (getCar2().isKnockBackApplier()) {
-            getCar1().knockBack();
+            getCar1().knockBack(getCar2().getMiddle());
         }
         if (getCar1().isKnockBackApplier()) {
-            getCar2().knockBack();
+            getCar2().knockBack(getCar1().getMiddle());
         }
 
         return winner;

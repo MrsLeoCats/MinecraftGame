@@ -3,6 +3,7 @@ package de.tum.in.ase.eist.car;
 import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.GameBoard;
 import de.tum.in.ase.eist.Point2D;
+import de.tum.in.ase.eist.audio.AudioPlayer;
 import javafx.scene.canvas.GraphicsContext;
 
 public class SlowCar extends Car {
@@ -30,6 +31,7 @@ public class SlowCar extends Car {
 
     @Override
     public void onDraw(GraphicsContext context) {
+        super.onDraw(context);
         if (++ticksAlive % PROJECTILE_TIMEOUT != 0) {
             return;
         }
@@ -38,6 +40,11 @@ public class SlowCar extends Car {
         Point2D pos = playerCar.getPosition();
         ProjectileCar projectile = new ProjectileCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, getRotationTowards(pos));
         board.getCars().add(projectile);
+    }
+
+    @Override
+    public void onCollision() {
+        AudioPlayer.getInstance().playHitSkeletonSound();
     }
 
 }

@@ -2,6 +2,7 @@ package de.tum.in.ase.eist.car;
 
 import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.Point2D;
+import de.tum.in.ase.eist.audio.AudioPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -49,10 +50,18 @@ public class EndermanCar extends Car {
         tpFromPos = new Point2D(current.getX(), current.getY());
         tpDrawCounter = LINGERING_TP_TIME;
         setPosition(current.getX() + dx, current.getY() + dy);
+        AudioPlayer.getInstance().playTeleportSound();
+    }
+
+
+    @Override
+    public void onCollision() {
+        AudioPlayer.getInstance().playHitEndermanSound();
     }
 
     @Override
     public void onDraw(GraphicsContext context) {
+        super.onDraw(context);
         if(tpDrawCounter <= 0) {
             return;
         }
