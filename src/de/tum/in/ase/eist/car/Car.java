@@ -3,7 +3,6 @@ package de.tum.in.ase.eist.car;
 import java.util.concurrent.ThreadLocalRandom;
 
 import de.tum.in.ase.eist.Dimension2D;
-import de.tum.in.ase.eist.GameBoard;
 import de.tum.in.ase.eist.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -205,8 +204,8 @@ public abstract class Car {
 
     public void onDraw(GraphicsContext context) {
         this.dmgCounter--;
-        if(dmgCounter > 0) {
-            context.setGlobalAlpha(0.4);
+        if (dmgCounter > ZERO) {
+            context.setGlobalAlpha(ZERO_DOT_4);
             context.setFill(Color.RED);
             context.fillRect(position.getX(), position.getY(), size.getWidth(), size.getHeight());
             context.setGlobalAlpha(1.0);
@@ -299,8 +298,8 @@ public abstract class Car {
     }
 
     public void damage(int amount) {
-        if(amount > 0) {
-            dmgCounter = 10;
+        if (amount > ZERO) {
+            dmgCounter = TEN;
         }
         hp -= amount;
         hp = Math.max(0, hp);

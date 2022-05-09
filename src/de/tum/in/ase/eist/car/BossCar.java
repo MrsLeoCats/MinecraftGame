@@ -3,7 +3,6 @@ package de.tum.in.ase.eist.car;
 import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.GameBoard;
 import de.tum.in.ase.eist.Point2D;
-import de.tum.in.ase.eist.audio.AudioPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -77,10 +76,10 @@ public class BossCar extends Car {
             Car playerCar = board.getPlayerCar();
             Point2D pos = playerCar.getPosition();
             int rot = getRotationTowards(pos);
-            int rotP = rot + 10;
-            int rotN = rot - 10;
-            if(rotN < 0) {
-                rotN += 360;
+            int rotP = rot + DROT;
+            int rotN = rot - DROT;
+            if (rotN < 0) {
+                rotN += FULL;
             }
             ProjectileCar projectileA = new FireballCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, rotP);
             ProjectileCar projectileB = new FireballCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, rot);
@@ -89,10 +88,10 @@ public class BossCar extends Car {
             board.getCars().add(projectileB);
             board.getCars().add(projectileC);
         }
-        if(ticksAlive % PROJECTILE_TIMEOUT * 10 == 0) {
-            rotCounter = 12;
+        if (ticksAlive % PROJECTILE_TIMEOUT * DROT == 0) {
+            rotCounter = ROT_COUNT;
         }
-        if(rotCounter > 0 && ticksAlive % 5 == 0) {
+        if (rotCounter > 0 && ticksAlive % MOD == 0) {
             rotCounter--;
             GameBoard board = GameBoard.getInstance();
             ProjectileCar projectileB = new FireballCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, rotCounter * 30);

@@ -35,17 +35,20 @@ public class ProjectileCar extends Car {
     public void onDraw(GraphicsContext context) {
         super.onDraw(context);
         path.add(new Point2D(getPosition().getX(), getPosition().getY()));
-        if(path.size() >= 6) {
+        if (path.size() >= 6) {
             path.poll();
         }
         context.setFill(Color.GRAY);
-        for(int i = 0; i < path.size(); i++) {
+        for(int i = path.size() - 1; i >= 0; i--) {
             Point2D next = path.poll();
-            context.setGlobalAlpha(0.2 + 0.1 * i);
+            if(next == null) {
+                break;
+            }
+            context.setGlobalAlpha(BASE + DELTA * i);
             context.fillRect(next.getX(), next.getY(), getSize().getWidth(), getSize().getHeight());
             path.add(next);
         }
-        context.setGlobalAlpha(1.0);
+        context.setGlobalAlpha(ACCELERATION);
     }
 
 }

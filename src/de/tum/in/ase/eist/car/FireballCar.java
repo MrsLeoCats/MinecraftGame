@@ -30,7 +30,7 @@ public class FireballCar extends ProjectileCar {
             path.poll();
         }
         context.setFill(Color.ORANGE);
-        for(int i = 0; i < path.size(); i++) {
+        for (int i = 0; i < path.size(); i++) {
             Point2D next = path.poll();
             context.setGlobalAlpha(0.18 + 0.08 * i);
             context.fillRect(next.getX(), next.getY(), getSize().getWidth(), getSize().getHeight());

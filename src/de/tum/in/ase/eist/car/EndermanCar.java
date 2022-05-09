@@ -3,7 +3,6 @@ package de.tum.in.ase.eist.car;
 import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.GameBoard;
 import de.tum.in.ase.eist.Point2D;
-import de.tum.in.ase.eist.audio.AudioPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -32,7 +31,7 @@ public class EndermanCar extends Car {
 
     @Override
     public void drive(Dimension2D gameBoardSize) {
-        if(ThreadLocalRandom.current().nextDouble() < TP_CHANCE) {
+        if (ThreadLocalRandom.current().nextDouble() < TP_CHANCE) {
             randomTp();
         }
         super.drive(gameBoardSize);
@@ -40,13 +39,13 @@ public class EndermanCar extends Car {
 
     private void randomTp() {
         Point2D current = getPosition();
-        double dx = ThreadLocalRandom.current().nextDouble(40, 96);
-        double dy = ThreadLocalRandom.current().nextDouble(40, 96);
-        if(ThreadLocalRandom.current().nextBoolean()) {
-            dx *= -1;
+        double dx = ThreadLocalRandom.current().nextDouble(MIN, MAX);
+        double dy = ThreadLocalRandom.current().nextDouble(MIN, MAX);
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            dx *= -NUMS[1];
         }
-        if(ThreadLocalRandom.current().nextBoolean()) {
-            dy *= -1;
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            dy *= -NUMS[1];
         }
         tpFromPos = new Point2D(current.getX(), current.getY());
         tpDrawCounter = LINGERING_TP_TIME;
@@ -63,7 +62,7 @@ public class EndermanCar extends Car {
     @Override
     public void onDraw(GraphicsContext context) {
         super.onDraw(context);
-        if(tpDrawCounter <= 0) {
+        if (tpDrawCounter <= NUMS[0]) {
             return;
         }
         double hw = getSize().getWidth() / 2;

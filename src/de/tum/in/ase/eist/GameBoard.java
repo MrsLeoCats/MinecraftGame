@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.sun.javafx.animation.TickCalculation;
-import de.tum.in.ase.eist.audio.AudioPlayer;
 import de.tum.in.ase.eist.audio.AudioPlayerInterface;
 import de.tum.in.ase.eist.car.*;
 import de.tum.in.ase.eist.collision.Collision;

@@ -1,7 +1,6 @@
 package de.tum.in.ase.eist.gameview;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,7 +18,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 /**
@@ -29,7 +27,6 @@ import javafx.scene.text.Font;
  */
 public class GameBoardUI extends Canvas {
 
-    private static final Color BACKGROUND_COLOR = Color.WHITE;
     /**
      * The update period of the game in ms, this gives us 25 fps.
      */

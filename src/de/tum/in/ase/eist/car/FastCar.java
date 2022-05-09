@@ -2,8 +2,6 @@ package de.tum.in.ase.eist.car;
 
 import de.tum.in.ase.eist.Dimension2D;
 import de.tum.in.ase.eist.GameBoard;
-import de.tum.in.ase.eist.audio.AudioPlayer;
-
 
 public class FastCar extends Car {
 
