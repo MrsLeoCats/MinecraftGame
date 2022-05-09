@@ -14,6 +14,9 @@ public class ProjectileCar extends Car {
     private static final String PROJECTILE_CAR_IMAGE_FILE = "ProjectileCar.png";
     private static final double PROJECTILE_SPEED = 4.0;
     private static final double ACCELERATION = 1.0;
+    private static final double BASE = 0.2;
+    private static final double DELTA = 0.1;
+
     protected final ArrayDeque<Point2D> path = new ArrayDeque<>();
 
     public ProjectileCar(Dimension2D gameBoardSize, Point2D position, int attack, int direction) {

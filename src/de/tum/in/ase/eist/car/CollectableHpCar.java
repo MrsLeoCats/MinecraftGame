@@ -7,18 +7,21 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CollectableHpCar extends CollectableCar {
 
+    private static final int SIXTEEN = 16, TEN = 10, NOD = 0;
+    private static final double ONE = 1.0, ZERO = 0.0, DOT_25 = 0.25;
+
     public CollectableHpCar(Dimension2D gameBoardSize) {
         super(gameBoardSize);
         setIconLocation("HeartCar.png");
-        size = new Dimension2D(16, 16);
-        setSpeed(1.0);
-        setAcceleration(0.0);
-        setDirection(0);
-        setPosition(ThreadLocalRandom.current().nextDouble(0, gameBoardSize.getWidth() - 16), 10);
+        size = new Dimension2D(SIXTEEN, SIXTEEN);
+        setSpeed(ONE);
+        setAcceleration(ZERO);
+        setDirection(NOD);
+        setPosition(ThreadLocalRandom.current().nextDouble(NOD, gameBoardSize.getWidth() - SIXTEEN), TEN);
     }
 
     @Override
     public void onPickup(Player player) {
-        player.getCar().heal((int) (player.getCar().getMaxHp() * 0.25));
+        player.getCar().heal((int) (player.getCar().getMaxHp() * DOT_25));
     }
 }

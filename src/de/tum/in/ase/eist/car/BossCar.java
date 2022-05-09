@@ -21,8 +21,21 @@ public class BossCar extends Car {
     private static final int BOSS_MELEE_ATTACK = 0;
 
     private static final int PROJECTILE_DAMAGE = 1;
+    private static final int ROT_COUNT = 12;
+    private static final int MOD = 5;
 
     private static final int PROJECTILE_TIMEOUT = 100;
+    private static final int HP = 100;
+    private static final int MIN = 48;
+    private static final int MAX = 96;
+    private static final int DROT = 10;
+    private static final int FULL = 360;
+    private static final int DIV = 2;
+    private static final double PRE_ALPHA = 0.40001;
+    private static final double ALPHA = 1.0;
+    private static final int LW1 = 1;
+    private static final int LW2 = 2;
+
     private int tpDrawCounter = 0;
 
     private int ticksAlive = 0;
@@ -30,7 +43,7 @@ public class BossCar extends Car {
     private int rotCounter = 0;
 
     public BossCar(Dimension2D gameBoardSize) {
-        super(gameBoardSize, 100);
+        super(gameBoardSize, HP);
         setMinSpeed(MIN_SPEED_BOSS_CAR);
         setMaxSpeed(MAX_SPEED_BOSS_CAR);
         setRandomSpeed();
@@ -49,8 +62,8 @@ public class BossCar extends Car {
 
     private void randomTp() {
         Point2D current = getPosition();
-        double dx = ThreadLocalRandom.current().nextDouble(40, 96);
-        double dy = ThreadLocalRandom.current().nextDouble(40, 96);
+        double dx = ThreadLocalRandom.current().nextDouble(MIN, MAX);
+        double dy = ThreadLocalRandom.current().nextDouble(MIN, MAX);
         if (ThreadLocalRandom.current().nextBoolean()) {
             dx *= -1;
         }
@@ -98,16 +111,16 @@ public class BossCar extends Car {
             board.getCars().add(projectileB);
         }
         if (tpDrawCounter > 0) {
-            double hw = getSize().getWidth() / 2;
-            double hh = getSize().getHeight() / 2;
+            double hw = getSize().getWidth() / DIV;
+            double hh = getSize().getHeight() / DIV;
             tpDrawCounter--;
             context.setFill(Color.PURPLE);
-            context.setGlobalAlpha(0.40001);
-            context.setLineWidth(2);
+            context.setGlobalAlpha(PRE_ALPHA);
+            context.setLineWidth(LW2);
             context.fillRect(tpFromPos.getX(), tpFromPos.getY(), getSize().getWidth(), getSize().getHeight());
             context.strokeLine(tpFromPos.getX() + hw, tpFromPos.getY() + hh, getPosition().getX() + hw, getPosition().getY() + hh);
-            context.setGlobalAlpha(1.0);
-            context.setLineWidth(1);
+            context.setGlobalAlpha(ALPHA);
+            context.setLineWidth(LW1);
         }
     }
 }

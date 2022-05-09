@@ -20,6 +20,10 @@ public class GameBoard {
     private static final int NUMBER_OF_ZOMBIE_CARS = 4;
     private static final int NUMBER_OF_SKELETON_CARS = 3;
     private static final int NUMBER_OF_ENDERMAN_CARS = 1;
+    private static final int SPAWN_TICKS = 50;
+    private static final int DT1 = 3;
+    private static final double CHANCE1 = 0.01;
+    private static final double[] CHANCES = {0.45, 0.8};
 
     private static GameBoard instance;
 
@@ -158,23 +162,25 @@ public class GameBoard {
         checkSpawns();
     }
 
+
+
     private void checkSpawns() {
         if (ticksAlive % spawn_ticks == 0 && !bossSpawned) {
             randomSpawn();
-            if (spawn_ticks > 50) {
-                spawn_ticks -= 3;
+            if (spawn_ticks > SPAWN_TICKS) {
+                spawn_ticks -= DT1;
             }
         }
-        if (ThreadLocalRandom.current().nextDouble() < 0.01) {
+        if (ThreadLocalRandom.current().nextDouble() < CHANCE1) {
             cars.add(new CollectableHpCar(size));
         }
     }
 
     private void randomSpawn() {
         double value = ThreadLocalRandom.current().nextDouble();
-        if (value < 0.45) {
+        if (value < CHANCES[0]) {
             cars.add(new FastCar(size));
-        } else if (value < 0.80) {
+        } else if (value < CHANCES[1]) {
             cars.add(new SlowCar(size));
         } else {
             cars.add(new EndermanCar(size));

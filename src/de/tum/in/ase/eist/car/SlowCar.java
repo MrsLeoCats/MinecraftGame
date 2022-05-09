@@ -31,7 +31,7 @@ public class SlowCar extends Car {
     @Override
     public void onDraw(GraphicsContext context) {
         super.onDraw(context);
-        if (++ticksAlive % PROJECTILE_TIMEOUT != 0) {
+        if (++ticksAlive % PROJECTILE_TIMEOUT != SKELETON_MELEE_ATTACK) {
             return;
         }
         GameBoard board = GameBoard.getInstance();

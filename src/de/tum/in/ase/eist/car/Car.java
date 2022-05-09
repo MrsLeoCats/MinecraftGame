@@ -25,9 +25,14 @@ public abstract class Car {
 
     protected static final int DEFAULT_CAR_WIDTH = 32;
     protected static final int DEFAULT_CAR_HEIGHT = 32;
+    private static final double ZERO_DOT_4 = 0.4;
+    private static final double ONE = 1.0;
+    private static final int TEN = 10;
+    private static final int ZERO = 0;
+    private static final int TWO = 2;
 
     private int hp;
-    private int maxHp;
+    private final int maxHp;
     private double minSpeed;
     private double maxSpeed;
     private double speed;
@@ -84,13 +89,13 @@ public abstract class Car {
      * @param gameBoardSize dimensions of the game board
      */
     protected void setRandomPosition(Dimension2D gameBoardSize) {
-        double carX = calculateRandomDouble(0, gameBoardSize.getWidth() - size.getWidth());
-        double carY = calculateRandomDouble(0, gameBoardSize.getHeight() - size.getHeight());
+        double carX = calculateRandomDouble(ZERO, gameBoardSize.getWidth() - size.getWidth());
+        double carY = calculateRandomDouble(ZERO, gameBoardSize.getHeight() - size.getHeight());
         this.position = new Point2D(carX, carY);
     }
 
     protected void setRandomDirection() {
-        this.direction = calculateRandomInt(0, MAX_ANGLE);
+        this.direction = calculateRandomInt(ZERO, MAX_ANGLE);
     }
 
     /**
@@ -135,7 +140,7 @@ public abstract class Car {
         double newY = this.position.getY() + deltaY;
 
         // calculate position in case the boarder of the game board has been reached
-        if (newX < 0) {
+        if (newX < ZERO) {
             onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
@@ -149,11 +154,11 @@ public abstract class Car {
                 crunch();
                 return;
             }
-            newX = 2 * maxX - newX - 2 * this.size.getWidth();
+            newX = TWO * maxX - newX - TWO * this.size.getWidth();
             this.direction = MAX_ANGLE - this.direction;
         }
 
-        if (newY < 0) {
+        if (newY < ZERO) {
             onWallCollide();
             if (crunchesOnBorder) {
                 crunch();
@@ -161,7 +166,7 @@ public abstract class Car {
             }
             newY = -newY;
             this.direction = HALF_ANGLE - this.direction;
-            if (this.direction < 0) {
+            if (this.direction < ZERO) {
                 this.direction = MAX_ANGLE + this.direction;
             }
         } else if (newY + this.size.getHeight() > maxY) {
@@ -170,9 +175,9 @@ public abstract class Car {
                 crunch();
                 return;
             }
-            newY = 2 * maxY - newY - 2 * this.size.getHeight();
+            newY = TWO * maxY - newY - TWO * this.size.getHeight();
             this.direction = HALF_ANGLE - this.direction;
-            if (this.direction < 0) {
+            if (this.direction < ZERO) {
                 this.direction = MAX_ANGLE + this.direction;
             }
         }
@@ -192,7 +197,7 @@ public abstract class Car {
         double dirX = position.getX() - getPosition().getX();
         double dirY = position.getY() - getPosition().getY();
         int dir = (int) Math.toDegrees(Math.atan2(dirX, dirY));
-        if (dir < 0) {
+        if (dir < ZERO) {
             dir += MAX_ANGLE;
         }
         return dir;
@@ -208,7 +213,7 @@ public abstract class Car {
             context.setGlobalAlpha(ZERO_DOT_4);
             context.setFill(Color.RED);
             context.fillRect(position.getX(), position.getY(), size.getWidth(), size.getHeight());
-            context.setGlobalAlpha(1.0);
+            context.setGlobalAlpha(ONE);
         }
     }
 
@@ -220,7 +225,7 @@ public abstract class Car {
      *                                  higher than 360.
      */
     public void setDirection(int direction) {
-        if (direction < 0 || direction >= MAX_ANGLE) {
+        if (direction < ZERO || direction >= MAX_ANGLE) {
             throw new IllegalArgumentException("Direction must be between 0 (inclusive) and 360 (exclusive)");
         }
         this.direction = direction;
@@ -255,7 +260,7 @@ public abstract class Car {
      */
     public void incrementSpeed() {
         if (this.speed < this.maxSpeed) {
-            this.speed += speed < 0 ? STAND_BACK_DECELERATION : acceleration;
+            this.speed += speed < ZERO ? STAND_BACK_DECELERATION : acceleration;
         }
         if (speed > maxSpeed) {
             decrementSpeed();
@@ -289,7 +294,7 @@ public abstract class Car {
     }
 
     public double getHealthPercent() {
-        return 1.0 / maxHp * hp;
+        return ONE / maxHp * hp;
     }
 
     public void heal(int amount) {
@@ -302,7 +307,7 @@ public abstract class Car {
             dmgCounter = TEN;
         }
         hp -= amount;
-        hp = Math.max(0, hp);
+        hp = Math.max(ZERO, hp);
     }
 
     public boolean isDead() {
@@ -331,7 +336,7 @@ public abstract class Car {
 
     public void crunch() {
         this.crunched = true;
-        this.speed = 0;
+        this.speed = ZERO;
     }
 
     public boolean isCrunched() {
