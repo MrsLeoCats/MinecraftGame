@@ -16,7 +16,7 @@ import de.tum.in.ase.eist.collision.CombatCollision;
  */
 public class GameBoard {
 
-    private static int spawn_ticks = 300;
+
     private static final int NUMBER_OF_ZOMBIE_CARS = 4;
     private static final int NUMBER_OF_SKELETON_CARS = 3;
     private static final int NUMBER_OF_ENDERMAN_CARS = 1;
@@ -24,6 +24,7 @@ public class GameBoard {
     private static final int DT1 = 3;
     private static final double CHANCE1 = 0.01;
     private static final double[] CHANCES = {0.45, 0.8};
+    private static final int SPARTA = 300;
 
     private static GameBoard instance;
 
@@ -31,6 +32,7 @@ public class GameBoard {
         return instance;
     }
 
+    private int spawnTicks = SPARTA;
     private int ticksAlive = 0;
     private boolean bossSpawned = false;
 
@@ -165,10 +167,10 @@ public class GameBoard {
 
 
     private void checkSpawns() {
-        if (ticksAlive % spawn_ticks == 0 && !bossSpawned) {
+        if (ticksAlive % spawnTicks == 0 && !bossSpawned) {
             randomSpawn();
-            if (spawn_ticks > SPAWN_TICKS) {
-                spawn_ticks -= DT1;
+            if (spawnTicks > SPAWN_TICKS) {
+                spawnTicks -= DT1;
             }
         }
         if (ThreadLocalRandom.current().nextDouble() < CHANCE1) {

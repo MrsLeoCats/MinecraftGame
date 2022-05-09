@@ -40,9 +40,17 @@ public abstract class Car {
     private double acceleration;
     private int attack;
     private int defense;
-    protected boolean knockBackApplier = true;
-    protected boolean hostile = true;
-    protected int dmgCounter = 0;
+    private boolean knockBackApplier = true;
+    private boolean hostile = true;
+    private int dmgCounter = 0;
+
+    public void setHostile(boolean value) {
+        this.hostile = value;
+    }
+
+    public void setKnockBackApplier(boolean value) {
+        this.knockBackApplier = value;
+    }
 
     private Point2D position;
     /**

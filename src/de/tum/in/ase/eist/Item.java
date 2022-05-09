@@ -2,13 +2,13 @@ package de.tum.in.ase.eist;
 
 public class Item {
 
-    private static final int[] N = {1, 3, 5, 7};
+    private static final int WS = 1, SS = 3, IS = 5, DS = 7;
 
     private static final Item[] ITEMS = new Item[]{
-            new Item("wooden_sword.png", N[0]),
-            new Item("stone_sword.png", N[1]),
-            new Item("iron_sword.png", N[2]),
-            new Item("diamond_sword.png", N[3])
+            new Item("wooden_sword.png", WS),
+            new Item("stone_sword.png", SS),
+            new Item("iron_sword.png", IS),
+            new Item("diamond_sword.png", DS)
     };
 
     private static int counter = 0;

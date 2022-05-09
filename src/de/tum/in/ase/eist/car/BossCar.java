@@ -35,6 +35,7 @@ public class BossCar extends Car {
     private static final double ALPHA = 1.0;
     private static final int LW1 = 1;
     private static final int LW2 = 2;
+    private static final int THITY = 30;
 
     private int tpDrawCounter = 0;
 
@@ -107,7 +108,7 @@ public class BossCar extends Car {
         if (rotCounter > 0 && ticksAlive % MOD == 0) {
             rotCounter--;
             GameBoard board = GameBoard.getInstance();
-            ProjectileCar projectileB = new FireballCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, rotCounter * 30);
+            ProjectileCar projectileB = new FireballCar(board.getSize(), getMiddle(), PROJECTILE_DAMAGE, rotCounter * THITY);
             board.getCars().add(projectileB);
         }
         if (tpDrawCounter > 0) {

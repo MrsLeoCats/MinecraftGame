@@ -30,8 +30,8 @@ public class ProjectileCar extends Car {
         setDirection(direction);
         this.size = new Dimension2D(SIZE, SIZE);
         this.crunchesOnBorder = true;
-        this.knockBackApplier = false;
-        this.hostile = false;
+        setKnockBackApplier(false);
+        setHostile(false);
     }
 
     @Override

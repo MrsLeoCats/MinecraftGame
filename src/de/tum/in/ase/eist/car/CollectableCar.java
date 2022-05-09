@@ -14,8 +14,8 @@ public abstract class CollectableCar extends Car {
         setSpeed(ZERO);
         setAcceleration(ZERO);
         this.crunchesOnBorder = true;
-        this.knockBackApplier = false;
-        this.hostile = false;
+        setKnockBackApplier(false);
+        setHostile(false);
         this.setAttack(ZERO_I);
     }
 
