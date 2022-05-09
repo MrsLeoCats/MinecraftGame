@@ -97,21 +97,27 @@ public class AudioPlayer implements AudioPlayerInterface {
     /**
      * my play sound commands
      */
+    @Override
     public void playTeleportSound() {
         teleportPlayer.play(TELEPORT_SOUND_VOLUME);
     }
+    @Override
     public void playHitZombieSound() {
         hitZombiePlayer.play(HITZOMBIE_SOUND_VOLUME);
     }
+    @Override
     public void playHitEndermanSound() {
         hitEndermanPlayer.play(HITENDERMAN_SOUND_VOLUME);
     }
+    @Override
     public void playHitSkeletonSound() {
         hitSkeletonPlayer.play(HITSKELETON_SOUND_VOLUME);
     }
+    @Override
     public void playBossSpawnSound() {
         bossSpawnPlayer.play(BOSSSPAWN_SOUND_VOLUME);
     }
+    @Override
     public void playPlayerDeathSound() {
         deathPlayer.play(PLAYERDEATH_SOUND_VOLUME);
     }

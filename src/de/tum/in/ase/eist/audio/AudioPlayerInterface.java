@@ -28,4 +28,11 @@ public interface AudioPlayerInterface {
 	 */
 	void playCrashSound();
 
+	void playTeleportSound();
+	void playHitZombieSound();
+	void playHitEndermanSound();
+	void playHitSkeletonSound();
+	void playBossSpawnSound();
+	void playPlayerDeathSound();
+
 }
