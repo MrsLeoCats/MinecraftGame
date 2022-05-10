@@ -6,6 +6,8 @@ more and more difficult to get to the boss fight. But the more enemies the playe
 the better his weapon becomes: starting from a wooden sword to a diamond one.
 The player can not only loose hp displayed in an hp bar,
 but also gain some by collecting hearts moving down the map.
+The background picture tells a little story and lets the player know there is going to be
+a boss fight in the end.
 
 About the mobs:
 Enderman: can teleport, his last known position is getting indicated, does melee damage.
@@ -19,3 +21,5 @@ All the collision sound effects, the boss spawn- and player death sound effect a
 entirely "inspired" from minecraft.
 
 Please don't judge my code too much, it is quite late and those 100 magic number issues were juicy...
+According to Artemis there are some errors, but the game works fine. There is nothing
+stopping you to try out my game and get smashed by the boss! :)
