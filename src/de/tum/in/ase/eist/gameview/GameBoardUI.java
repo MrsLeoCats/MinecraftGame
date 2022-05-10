@@ -244,7 +244,7 @@ public class GameBoardUI extends Canvas {
 
         car.onDraw(getGraphicsContext2D());
 
-        if(car.getMaxHp() <= 1) {
+        if (car.getMaxHp() <= 1) {
             return;
         }
 

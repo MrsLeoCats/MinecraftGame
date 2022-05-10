@@ -30,8 +30,6 @@ public class AudioPlayer implements AudioPlayerInterface {
     private static final double HITENDERMAN_SOUND_VOLUME = 0.5;
     private static final double HITSKELETON_SOUND_VOLUME = 0.5;
     private static final double BOSSSPAWN_SOUND_VOLUME = 0.5;
-    private static final double ARROW_SOUND_VOLUME = 0.5;
-
     private static final double PLAYERDEATH_SOUND_VOLUME = 0.5;
     private static final double CRASH_SOUND_VOLUME = 0.5;
 

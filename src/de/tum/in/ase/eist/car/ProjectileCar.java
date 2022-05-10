@@ -42,9 +42,9 @@ public class ProjectileCar extends Car {
             path.poll();
         }
         context.setFill(Color.GRAY);
-        for(int i = path.size() - 1; i >= 0; i--) {
+        for (int i = path.size() - 1; i >= 0; i--) {
             Point2D next = path.poll();
-            if(next == null) {
+            if (next == null) {
                 break;
             }
             context.setGlobalAlpha(BASE + DELTA * i);
