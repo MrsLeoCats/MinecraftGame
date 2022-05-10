@@ -17,14 +17,14 @@ public class FireballCar extends ProjectileCar {
 
     public FireballCar(Dimension2D gameBoardSize, Point2D position, int attack, int direction) {
         super(gameBoardSize, position, attack, direction);
-        this.crunchesOnBorder = false;
+        setCrunchesOnBorder(false);
     }
 
     @Override
     public void onWallCollide() {
         bounces++;
         if (bounces == MAX_BOUNCES) {
-            this.crunchesOnBorder = true;
+            setCrunchesOnBorder(true);
         }
     }
 

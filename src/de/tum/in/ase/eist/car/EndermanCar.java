@@ -20,8 +20,11 @@ public class EndermanCar extends Car {
     private static final double MAX_SPEED_ENDERMAN_CAR = 0.5;
     private static final double ENDERMAN_ACCELERATION = 0.02;
 
-    private static final double STILL_ALPHA_0_DOT_4 = 0.4, POST_A = 1.0;
+    private static final double STILL_ALPHA_0_DOT_4 = 0.4;
+    private static final double POST_A = 1.0;
     private static final int[] NUMS = {0, 1, 2};
+    private static final int TRE = 3;
+    private static final int ON = 1;
 
     private int tpDrawCounter = NUMS[0];
     private Point2D tpFromPos = null;
@@ -76,12 +79,12 @@ public class EndermanCar extends Car {
         tpDrawCounter--;
         context.setFill(Color.PURPLE);
         context.setGlobalAlpha(STILL_ALPHA_0_DOT_4);
-        context.setLineWidth(3);
+        context.setLineWidth(TRE);
         //context.rect(tpFromPos.getX(), tpFromPos.getY(), getSize().getWidth(), getSize().getHeight());
         context.fillRect(tpFromPos.getX(), tpFromPos.getY(), getSize().getWidth(), getSize().getHeight());
         context.strokeLine(tpFromPos.getX() + hw, tpFromPos.getY() + hh, getPosition().getX() + hw, getPosition().getY() + hh);
         context.setGlobalAlpha(POST_A);
-        context.setLineWidth(1);
+        context.setLineWidth(ON);
     }
 
 }

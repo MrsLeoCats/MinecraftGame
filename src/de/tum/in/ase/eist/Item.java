@@ -2,7 +2,10 @@ package de.tum.in.ase.eist;
 
 public class Item {
 
-    private static final int WS = 1, SS = 3, IS = 5, DS = 7;
+    private static final int WS = 1;
+    private static final int SS = 3;
+    private static final int IS = 5;
+    private static final int DS = 7;
 
     private static final Item[] ITEMS = new Item[]{
             new Item("wooden_sword.png", WS),

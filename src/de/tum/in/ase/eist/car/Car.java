@@ -60,8 +60,16 @@ public abstract class Car {
     private int direction;
 
     private String iconLocation;
-    protected Dimension2D size = new Dimension2D(DEFAULT_CAR_WIDTH, DEFAULT_CAR_HEIGHT);
-    protected boolean crunchesOnBorder = false;
+    private Dimension2D size = new Dimension2D(DEFAULT_CAR_WIDTH, DEFAULT_CAR_HEIGHT);
+    private boolean crunchesOnBorder = false;
+
+    public boolean isCrunchesOnBorder() {
+        return crunchesOnBorder;
+    }
+
+    public void setCrunchesOnBorder(boolean value) {
+        this.crunchesOnBorder = value;
+    }
 
     /**
      * Constructor, taking the maximum coordinates of the game board. Each car gets
@@ -201,9 +209,9 @@ public abstract class Car {
         return maxHp;
     }
 
-    public int getRotationTowards(Point2D position) {
-        double dirX = position.getX() - getPosition().getX();
-        double dirY = position.getY() - getPosition().getY();
+    public int getRotationTowards(Point2D pos) {
+        double dirX = pos.getX() - getPosition().getX();
+        double dirY = pos.getY() - getPosition().getY();
         int dir = (int) Math.toDegrees(Math.atan2(dirX, dirY));
         if (dir < ZERO) {
             dir += MAX_ANGLE;

@@ -28,8 +28,8 @@ public class ProjectileCar extends Car {
         setAcceleration(ACCELERATION);
         setAttack(attack);
         setDirection(direction);
-        this.size = new Dimension2D(SIZE, SIZE);
-        this.crunchesOnBorder = true;
+        setSize(new Dimension2D(SIZE, SIZE));
+        setCrunchesOnBorder(true);
         setKnockBackApplier(false);
         setHostile(false);
     }
