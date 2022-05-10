@@ -17,7 +17,11 @@ public class ProjectileCar extends Car {
     private static final double BASE = 0.2;
     private static final double DELTA = 0.1;
 
-    protected final ArrayDeque<Point2D> path = new ArrayDeque<>();
+    private final ArrayDeque<Point2D> path = new ArrayDeque<>();
+
+    protected ArrayDeque<Point2D> getPath() {
+        return path;
+    }
 
     public ProjectileCar(Dimension2D gameBoardSize, Point2D position, int attack, int direction) {
         super(gameBoardSize, HP);

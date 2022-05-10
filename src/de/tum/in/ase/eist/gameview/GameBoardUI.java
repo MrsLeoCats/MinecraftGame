@@ -38,6 +38,20 @@ public class GameBoardUI extends Canvas {
     private static final String BG_IMAGE_LOC = "background.jpg";
     private static final String INV_SLOT_LOC = "inventory.png";
 
+    private static final int SX = 16;
+    private static final int LX = 50;
+    private static final int LY = 410;
+    private static final int WW = 44;
+    private static final int ABC = 390;
+    private static final int AA = 140;
+    private static final int BV = 380;
+    private static final int CD = 32;
+    private static final int GD = 144;
+    private static final int AB = 384;
+    private static final int HD = 24;
+    private static final int NL = 0;
+    private static final int ONE = 1;
+
     public static Dimension2D getPreferredSize() {
         return DEFAULT_SIZE;
     }
@@ -207,26 +221,28 @@ public class GameBoardUI extends Canvas {
         paintInv();
     }
 
+
+
     private void paintScore() {
         int score = gameBoard.getPlayer().getScore();
         getGraphicsContext2D().setFill(Color.BLACK);
-        getGraphicsContext2D().setFont(new Font("Arial", 16));
-        getGraphicsContext2D().fillText("Kills: " + score, 50, 410);
+        getGraphicsContext2D().setFont(new Font("Arial", SX));
+        getGraphicsContext2D().fillText("Kills: " + score, LX, LY);
     }
 
     private void paintTimer() {
         getGraphicsContext2D().setFill(Color.BLACK);
-        getGraphicsContext2D().setFont(new Font("Arial", 16));
-        getGraphicsContext2D().fillText("Time: " + gameScoreTimer.toReadable(), 44, 390);
+        getGraphicsContext2D().setFont(new Font("Arial", SX));
+        getGraphicsContext2D().fillText("Time: " + gameScoreTimer.toReadable(), WW, ABC);
     }
 
     private void paintInv() {
-        getGraphicsContext2D().drawImage(getImage(INV_SLOT_LOC), 140, 380, 32, 32);
-        getGraphicsContext2D().drawImage(getImage(gameBoard.getPlayer().getItem().image()), 144, 384, 24, 24);
+        getGraphicsContext2D().drawImage(getImage(INV_SLOT_LOC), AA, BV, CD, CD);
+        getGraphicsContext2D().drawImage(getImage(gameBoard.getPlayer().getItem().image()), GD, AB, HD, HD);
     }
 
     private void paintBackground() {
-        getGraphicsContext2D().drawImage(getImage(BG_IMAGE_LOC), 0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        getGraphicsContext2D().drawImage(getImage(BG_IMAGE_LOC), NL, NL, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
     /**
@@ -244,16 +260,16 @@ public class GameBoardUI extends Canvas {
 
         car.onDraw(getGraphicsContext2D());
 
-        if (car.getMaxHp() <= 1) {
+        if (car.getMaxHp() <= ONE) {
             return;
         }
 
         getGraphicsContext2D().setFill(Color.RED);
-        getGraphicsContext2D().fillRect(carPosition.getX(), carPosition.getY() + 1, width, HP_BAR_HEIGHT);
+        getGraphicsContext2D().fillRect(carPosition.getX(), carPosition.getY() + ONE, width, HP_BAR_HEIGHT);
         getGraphicsContext2D().setFill(Color.GREEN);
-        getGraphicsContext2D().fillRect(carPosition.getX(), carPosition.getY() + 1, width * car.getHealthPercent(), HP_BAR_HEIGHT);
+        getGraphicsContext2D().fillRect(carPosition.getX(), carPosition.getY() + ONE, width * car.getHealthPercent(), HP_BAR_HEIGHT);
         getGraphicsContext2D().setFill(Color.BLACK);
-        getGraphicsContext2D().rect(carPosition.getX(), carPosition.getY() + 1, width, HP_BAR_HEIGHT);
+        getGraphicsContext2D().rect(carPosition.getX(), carPosition.getY() + ONE, width, HP_BAR_HEIGHT);
     }
 
     /**

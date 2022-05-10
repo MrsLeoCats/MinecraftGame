@@ -31,16 +31,19 @@ public class FireballCar extends ProjectileCar {
     @Override
     public void onDraw(GraphicsContext context) {
         super.onDraw(context);
-        path.add(new Point2D(getPosition().getX(), getPosition().getY()));
-        if (path.size() >= POLL_SIZE) {
-            path.poll();
+        getPath().add(new Point2D(getPosition().getX(), getPosition().getY()));
+        if (getPath().size() >= POLL_SIZE) {
+            getPath().poll();
         }
         context.setFill(Color.ORANGE);
-        for (int i = 0; i < path.size(); i++) {
-            Point2D next = path.poll();
+        for (int i = 0; i < getPath().size(); i++) {
+            Point2D next = getPath().poll();
+            if (next == null) {
+                continue;
+            }
             context.setGlobalAlpha(BASE_ALPHA + DELTA_ALPHA * i);
             context.fillRect(next.getX(), next.getY(), getSize().getWidth(), getSize().getHeight());
-            path.add(next);
+            getPath().add(next);
         }
         context.setGlobalAlpha(FULL_ALPHA);
     }
