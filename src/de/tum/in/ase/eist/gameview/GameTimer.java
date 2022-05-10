@@ -2,7 +2,8 @@ package de.tum.in.ase.eist.gameview;
 
 public class GameTimer {
 
-    private static final int SEC = 1000, MIN = 60;
+    private static final int SEC = 1000;
+    private static final int MIN = 60;
 
     private long startTime = System.currentTimeMillis();
 

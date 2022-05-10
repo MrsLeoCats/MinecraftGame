@@ -16,6 +16,7 @@ public class ProjectileCar extends Car {
     private static final double ACCELERATION = 1.0;
     private static final double BASE = 0.2;
     private static final double DELTA = 0.1;
+    private static final int PATH = 6;
 
     private final ArrayDeque<Point2D> path = new ArrayDeque<>();
 
@@ -42,7 +43,7 @@ public class ProjectileCar extends Car {
     public void onDraw(GraphicsContext context) {
         super.onDraw(context);
         path.add(new Point2D(getPosition().getX(), getPosition().getY()));
-        if (path.size() >= 6) {
+        if (path.size() >= PATH) {
             path.poll();
         }
         context.setFill(Color.GRAY);
